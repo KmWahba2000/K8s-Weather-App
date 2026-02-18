@@ -140,9 +140,7 @@ I opened `http://localhost:8080` and the app was fully working.
 
 I wanted to prove that the app stays up even when a pod dies.
 
-<video width="1000" controls>
-  <source src="https://drive.google.com/file/d/17ENDL0b3plc6qW7GUdTrypyDHKaJDhuV/view?usp=sharing" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/1f1e0618-3e55-4582-9f4b-867b9fa92626
 
 - The deleted pod went `Terminating`
 - A new pod immediately went `Pending` → `ContainerCreating` → `Running`
@@ -159,9 +157,7 @@ I generated real CPU load to trigger the HPA to scale up.
 
 I used `hey` for load testing, it basically sends a large number of **HTTP** requests to put load on the application.
 
-<video width="1000" controls>
-  <source src="images/test2.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/0b6c29f7-e21c-43b0-80fd-2b65166f13ce
 
 - The CPU% climbed. Once it crossed 50%, the HPA kicked in.
 - After the load stopped, I waited a few minutes and it scaled back down to 2 automatically. The HPA has a built-in cooldown period before scaling down to avoid thrashing.
@@ -183,9 +179,7 @@ Then I triggered the rolling update:
 kubectl set image deployment/weather-app-deployment weather-app=kmwahba/weather-app:v2
 ```
 
-<video width="1000" controls>
-  <source src="images/test3.mp4" type="video/mp4">
-</video>
+https://github.com/user-attachments/assets/8a17f243-6460-4b84-81f3-fbbf3f4cba68
 
 While testing the K8s concepts I noticed that `kubectl port-forward` drops every time a pod is replaced or deleted. That's because port-forward connects directly to a specific pod, not through the service, so when that pod dies, the tunnel dies with it.
 
