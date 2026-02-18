@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link rel="stylesheet" href="/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <div class="card">
+    <div class="grid-container">
+
+      <div class="grid-item">
+        <div class="title"><span class="icon">📍</span> Location</div>
+        <div class="value location" id="location">Locating…</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="title"><span class="icon">🌡️</span> Temperature</div>
+        <div class="value temp" id="temp">--</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="title"><span class="icon">🌤️</span> Condition</div>
+        <div class="value pulse" id="description">--</div>
+      </div>
+
+      <div class="grid-item">
+        <div class="title"><span class="icon">💧</span> Humidity</div>
+        <div class="value" id="humidity">--</div>
+      </div>
+
+    </div>
+
+    <div id="error-msg" style="display:none; text-align:center; color:#ff6b6b;
+         font-family:'Poppins',sans-serif; margin-top:20px; font-size:13px;"></div>
+  </div>
+
+  <div class="pod-banner">
+    <span class="pod-label">🖥️ Served by pod:</span>
+    <span class="pod-name"><%= podName %></span>
+  </div>
+
+  <script>
+    function showError(msg) {
+      document.getElementById('location').textContent = 'Unavailable';
+      const el = document.getElementById('error-msg');
+      el.style.display = 'block';
+      el.textContent = msg;
+    }
+
+    function loadWeather(lat, lon) {
+      fetch(`/weather?lat=${lat}&lon=${lon}`)
+        .then(r => r.json())
+        .then(data => {
+          if (data.error) { showError(data.error); return; }
+          document.getElementById('location').textContent    = data.location;
+          document.getElementById('temp').textContent        = `${data.temp}°C`;
+          document.getElementById('description').textContent = data.description;
+          document.getElementById('humidity').textContent    = `${data.humidity}%`;
+        })
+        .catch(() => showError('Could not load weather data.'));
+    }
+
+    if (!('geolocation' in navigator)) {
+      showError('Geolocation is not supported by this browser.');
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        pos => loadWeather(pos.coords.latitude, pos.coords.longitude),
+        err => {
+          const reasons = {
+            1: 'Location access denied. Click the 🔒 icon in your address bar, allow location, then refresh.',
+            2: 'Position unavailable.',
+            3: 'Location request timed out.',
+          };
+          showError(reasons[err.code] || err.message);
+        },
+        { timeout: 10000, maximumAge: 0 }
+      );
+    }
+  </script>
+
+</body>
+</html>

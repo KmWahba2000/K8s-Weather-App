@@ -1,0 +1,146 @@
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #f7971e, #ffd200);
+}
+
+.card {
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 30px;
+  padding: 50px 70px 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  min-width: 520px;
+  max-width: 640px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 30px;
+}
+
+/* Each cell is a centered column */
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  gap: 8px;
+}
+
+/* Label row: icon + text, same size, same line */
+.title {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Value below the label */
+.value {
+  font-size: 42px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  width: 100%;
+  line-height: 1.1;
+}
+
+.temp {
+  background: linear-gradient(90deg, #ff9966, #ff5e62);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.location {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.pulse {
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+/* Pod banner */
+.pod-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.pod-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.65);
+  letter-spacing: 0.5px;
+}
+
+.pod-name {
+  font-family: 'Courier New', monospace;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffdd57;
+  letter-spacing: 1.5px;
+}
+
+@media (max-width: 600px) {
+  .card {
+    padding: 40px 36px 30px;
+    min-width: unset;
+    width: 90vw;
+  }
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .title {
+    font-size: 16px;
+  }
+  .icon {
+    font-size: 16px;
+  }
+  .value {
+    font-size: 34px;
+  }
+  .location {
+    font-size: 26px;
+  }
+}
