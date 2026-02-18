@@ -13,6 +13,7 @@ But the real focus here is the infrastructure and how I orchestrated the app wit
 The app runs with a minimum of **two replicas at all times**, so if one pod crashes the other keeps serving traffic with no downtime. I set up a **Horizontal Pod Autoscaler** that monitors CPU usage and automatically scales the deployment from 2 up to 5 pods under load. Every pod has **liveness and readiness probes** so Kubernetes knows when a pod is healthy enough to receive traffic and when it needs to be restarted. Resource requests and limits are defined on every container, which is actually a hard requirement for the HPA's CPU metrics to function correctly.
 
 The whole thing is containerized with Docker and the Kubernetes manifests are clean and reusable. 
+
 ---
 
 ### Project Structure
