@@ -141,7 +141,7 @@ I opened `http://localhost:8080` and the app was fully working.
 I wanted to prove that the app stays up even when a pod dies.
 
 <video width="1000" controls>
-  <source src="images/test1.mp4" type="video/mp4">
+  <source src="https://drive.google.com/file/d/17ENDL0b3plc6qW7GUdTrypyDHKaJDhuV/view?usp=sharing" type="video/mp4">
 </video>
 
 - The deleted pod went `Terminating`
